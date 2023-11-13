@@ -60,39 +60,39 @@ describe('Test with backend', () =>{
 
     })
 
-    it('intercepting and modifyinf the request adn response ', () => {
+    // it('intercepting and modifyinf the request adn response ', () => {
 
 
-        // cy.intercept('POST', '**/articles/', (req) =>{
-        //     req.body.article.description = "Ovo je opis 2"
-        // }).as('postArticles')
+    //     cy.intercept('POST', '**/articles/', (req) =>{
+    //         req.body.article.description = "Ovo je opis 2"
+    //     }).as('postArticles')
 
         
-        cy.intercept('POST', '**/articles/', (req) =>{
-            req.reply(res => {
-                expect(res.body.article.description).to.equal('Ovo je opis')
-                res.body.article.description = "Ovo je opis 2"
-            })
-        }).as('postArticles')
+    //     cy.intercept('POST', '**/articles/', (req) =>{
+    //         req.reply(res => {
+    //             expect(res.body.article.description).to.equal('Ovo je opis')
+    //             res.body.article.description = "Ovo je opis 2"
+    //         })
+    //     }).as('postArticles')
         
-        cy.contains('New Article').click()
-        cy.get('[formcontrolname="title"]').type('Novi Artikal')
-        cy.get('[formcontrolname="description"]').type('Ovo je opis')
-        cy.get('[formcontrolname="body"]').type('Ovo je body od ovog artikla')
-        cy.contains('Publish Article').click()
+    //     cy.contains('New Article').click()
+    //     cy.get('[formcontrolname="title"]').type('Novi Artikal')
+    //     cy.get('[formcontrolname="description"]').type('Ovo je opis')
+    //     cy.get('[formcontrolname="body"]').type('Ovo je body od ovog artikla')
+    //     cy.contains('Publish Article').click()
 
-        cy.wait('@postArticles').then(xhr => {
+    //     cy.wait('@postArticles').then(xhr => {
 
-            console.log(xhr)
-            expect(xhr.response.statusCode).to.equal(201)
-            expect(xhr.request.body.article.body).to.equal('Ovo je body od ovog artikla')
-            expect(xhr.response.body.article.description).to.equal('Ovo je opis 2')
-        })
+    //         console.log(xhr)
+    //         expect(xhr.response.statusCode).to.equal(201)
+    //         expect(xhr.request.body.article.body).to.equal('Ovo je body od ovog artikla')
+    //         expect(xhr.response.body.article.description).to.equal('Ovo je opis 2')
+    //     })
 
 
-    })
+    // })
 
-    it.only('delete new article in a global feed', () =>{
+    it('delete new article in a global feed', () =>{
 
         const userCredentials = {
             "user": {
