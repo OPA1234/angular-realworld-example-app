@@ -92,7 +92,7 @@ describe('Test with backend', () =>{
 
     // })
 
-    it('delete new article in a global feed', () =>{
+    it.only('delete new article in a global feed', () =>{
 
         
 
@@ -109,7 +109,7 @@ describe('Test with backend', () =>{
 
 
             cy.request({
-                url: 'https://api.realworld.io/api/articles/',
+                url: Cypress.env('apiUrl')+'/api/articles/',
                 headers: { 'Authorization': 'Token '+token},
                 method: 'POST',
                 body: bodyRequest,
